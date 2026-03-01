@@ -1,27 +1,125 @@
 <html>
 <head>
-    <title> KC Chatbot </title>
+    <title>KC Chatbot</title>
+
     <style>
-        * { font-size: 30px; text-align:center; font-family: Cambria;}
-        textarea{ resize:none; text-align:left; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 450px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #0072ff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .chat-area {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            white-space: pre-line;
+            font-size: 16px;
+            background: #f4f9ff;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background: white;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .input-area button {
+            margin-left: 10px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background: #0072ff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .input-area button:hover {
+            background: #005bd1;
+        }
+
+        .chat-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-area::-webkit-scrollbar-thumb {
+            background: #0072ff;
+            border-radius: 10px;
+        }
     </style>
+
     <script>
-        function sb()
-        {
-            let chatbox = document.getElementById("chatbox");
-            chatbox.scrollTop = chatbox.scrollHeight;
+        function scrollDown() {
+            var chatArea = document.getElementById("chatArea");
+            chatArea.scrollTop = chatArea.scrollHeight;
         }
     </script>
 </head>
 
-<body onload="sb()">
-    <h1> KC ChatBot </h1>
-    <form method="POST">
-        <textarea rows=7 cols=70 name="chat" id="chatbox">{{chat}}</textarea>
-        <br><br>
-        <input type="text" name="qts" placeholder="Enter Question" />
-        <input type="submit" />
+<body onload="scrollDown()">
+
+<div class="container">
+
+    <div class="header">
+        KC ChatBot 💬
+    </div>
+
+    <form method="POST" style="display:flex; flex-direction:column; height:100%;">
+
+        <!-- Chat Display Area (User cannot type here) -->
+        <div class="chat-area" id="chatArea">
+            {{chat}}
+        </div>
+
+        <!-- Hidden textarea to store chat -->
+        <textarea name="chat" hidden>{{chat}}</textarea>
+
+        <!-- Input Area at Bottom -->
+        <div class="input-area">
+            <input type="text" name="qts" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+        </div>
+
     </form>
-    <h2> {{ msg }} </h2>
+
+</div>
+
 </body>
 </html>
