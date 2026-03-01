@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title> KC Chatbot </title>
+    <style>
+        * { font-size: 30px; text-align:center; font-family: Cambria;}
+        textarea{ resize:none; text-align:left; }
+    </style>
+    <script>
+        function sb()
+        {
+            let chatbox = document.getElementById("chatbox");
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+    </script>
+</head>
+
+<body onload="sb()">
+    <h1> KC ChatBot </h1>
+    <form method="POST">
+        <textarea rows=7 cols=70 name="chat" id="chatbox">{{chat}}</textarea>
+        <br><br>
+        <input type="text" name="qts" placeholder="Enter Question" />
+        <input type="submit" />
+    </form>
+    <h2> {{ msg }} </h2>
+</body>
+</html>
